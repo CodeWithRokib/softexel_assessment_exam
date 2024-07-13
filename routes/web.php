@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
+
+Route::get('/productList',[ProductController::class,'index'])->name('product.index');
+Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
+
+
+Route::get('/categroy',[CategoryController::class,'index'])->name('categroy.index');
+
+Route::get('/subcategroy',[SubcategoryController::class,'index'])->name('subcategroy.index');
