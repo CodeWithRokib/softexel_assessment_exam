@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,11 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+             // Reset cached roles and permissions
+             app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+             // create permissions
+             Permission::create(['name' => 'access dashboard']);
+     
+             // create roles and assign created permissions
+             $superAdminRole = Role::create(['name' => 'super admin']);
+             $adminRole = Role::create(['name' => 'admin']);
+             $userRole = Role::create(['name' => 'user']);
+     
+             $superAdminRole->givePermissionTo('access dashboard');
+             $adminRole->givePermissionTo('access dashboard');
     }
 }
