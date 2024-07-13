@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class CheckRole
 {
@@ -20,11 +21,12 @@ class CheckRole
         }
 
         $user = Auth::user();
-
-        if($user->hasAnyRole($roles)) {
-            return $next($request);
+        if (!in_array($user->role, $roles)) {
+            // Redirect to a specific page or return a response
+            return redirect('/dashboard')->with('error', 'You do not have access to this section.');
         }
 
-        return redirect('product');
+        return $next($request);
+    
     }
 }
