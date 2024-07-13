@@ -16,23 +16,19 @@
                 </ul>
             </div>
         @endif
-        <form action="" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+        <form action="{{route('subcategory.store')}}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
             @csrf
             <div class="mb-6">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
                 <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('name') }}">
             </div>
-            <div class="mb-6">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                <textarea name="description" id="description" rows="4" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ old('description') }}</textarea>
-            </div>
-            <div class="mb-6">
-                <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price:</label>
-                <input type="text" name="price" id="price" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('price') }}">
-            </div>
-            <div class="mb-6">
-                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
-                <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div class="form-group">
+                <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
+                <select name="category_id" id="category_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="flex items-center justify-between">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline">Create Product</button>

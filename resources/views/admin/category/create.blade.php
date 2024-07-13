@@ -16,24 +16,13 @@
                 </ul>
             </div>
         @endif
-        <form action="" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+        <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
             @csrf
             <div class="mb-6">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
                 <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('name') }}">
             </div>
-            <div class="mb-6">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                <textarea name="description" id="description" rows="4" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ old('description') }}</textarea>
-            </div>
-            <div class="mb-6">
-                <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price:</label>
-                <input type="text" name="price" id="price" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('price') }}">
-            </div>
-            <div class="mb-6">
-                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
-                <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
+           
             <div class="flex items-center justify-between">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline">Create Product</button>
             </div>
