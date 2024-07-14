@@ -35,7 +35,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => 'required|exists:subcategories,id',
+            'subcategory_id' => 'required|exists:sub_categories,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -55,4 +55,6 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
+
+    
 }
