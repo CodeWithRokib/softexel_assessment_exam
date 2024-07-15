@@ -28,6 +28,12 @@ class ProductController extends Controller
         $subcategories = Subcategory::all();
         return view('admin.product.create', compact('categories', 'subcategories'));
     }
+    public function edit(Product $product){
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+
+        return view('admin.product.edit', compact('product', 'categories', 'subcategories'));
+}
     public function store(Request $request)
     {
         $request->validate([
@@ -54,7 +60,7 @@ class ProductController extends Controller
             'subcategory_id' => $request->subcategory_id,
         ]);
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+        return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
     public function update(Request $request, Product $product)
     {
@@ -81,7 +87,7 @@ class ProductController extends Controller
             'subcategory_id' => $request->subcategory_id,
         ]);
 
-        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
 
     public function destroy(Product $product)
@@ -90,7 +96,7 @@ class ProductController extends Controller
             Storage::delete('public/' . $product->image);
         }
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
     }
 
 }
