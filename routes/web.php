@@ -20,9 +20,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::group(['middleware' => ['auth', 'role:admin,super admin']], function () {
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
@@ -30,16 +28,23 @@ Route::group(['middleware' => ['auth', 'role:admin,super admin']], function () {
     Route::get('/productList',[ProductController::class,'index'])->name('product.index');
     Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
     Route::post('/product/create',[ProductController::class,'store'])->name('product.store');
+    Route::get('/product/edit',[ProductController::class,'edit'])->name('product.edit');
+    Route::put('/product/edit',[ProductController::class,'update'])->name('product.update');
+    Route::delete('/product/edit',[ProductController::class,'destroy'])->name('product.delete');
 
         
     Route::get('/categroy',[CategoryController::class,'index'])->name('categroy.index');
     Route::get('/categroy/create',[CategoryController::class,'create'])->name('categroy.create');
     Route::post('/categroy/create',[CategoryController::class,'store'])->name('category.store');
+    Route::delete('/categroy/edit',[CategoryController::class,'destroy'])->name('category.delete');
+
 
 
     Route::get('/subcategroy',[SubcategoryController::class,'index'])->name('subcategroy.index');
     Route::get('/subcategroy/create',[SubcategoryController::class,'create'])->name('subcategroy.create');
     Route::post('/subcategroy/create',[SubcategoryController::class,'store'])->name('subcategory.store');
+    Route::delete('/subcategroy/edit',[SubcategoryController::class,'destroy'])->name('subcategory.delete');
+
 });
 
 Route::get('/register',[UserController::class, 'loadRegister'])->name('register');
@@ -50,3 +55,4 @@ Route::post('/login',[UserController::class,'userLogin'])->name('login');
 
 
 Route::get('/product',[ProductController::class,'index2'])->name('products.index');
+Route::get('/',[ProductController::class,'index2'])->name('products.index');

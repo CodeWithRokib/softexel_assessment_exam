@@ -32,6 +32,20 @@
                             No Image
                         @endif
                     </td>
+                    <td>
+                    <a href="{{ route('product.edit', $product->id) }}"
+    class="inline-flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-700 text-white text-sm font-medium rounded-md">
+    Edit
+</a>
+<form action="{{ route('product.delete', $product->id) }}" method="DELETE" class="inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit"
+        class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-700 text-white text-sm font-medium rounded-md">
+        Delete
+    </button>
+</form>
+                    </td>
                   
                 </tr>
             @endforeach

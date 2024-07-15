@@ -12,13 +12,22 @@
             <tr>
                 <th class="px-4 py-2">ID</th>
                 <th class="px-4 py-2">Name</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($categories as $category)
                 <tr>
                     <td class="border px-4 py-2">{{ $category->id }}</td>
-                    <td class="border px-4 py-2">{{ $category->name }}</td>        
+                    <td class="border px-4 py-2">{{ $category->name }}</td>  
+                    <td>
+                    <form action="{{ route('category.delete', $category->id) }}" method="DELETE" class="inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit"
+        class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-700 text-white text-sm font-medium rounded-md">
+        Delete
+    </button>      
                 </tr>
             @endforeach
         </tbody>

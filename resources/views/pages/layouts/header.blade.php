@@ -2,11 +2,11 @@
     <div class="container mx-auto flex justify-between items-center">
         <a href="#" class="text-white text-lg font-bold">Logo</a>
         <div class="hidden md:flex space-x-4">
-            <a href="#" class="text-gray-300 hover:text-white">Home</a>
-            <a href="#" class="text-gray-300 hover:text-white">About</a>
-            <a href="#" class="text-gray-300 hover:text-white">Services</a>
+            <a href="{{route('products.index')}}" class="text-gray-300 hover:text-white">Home</a>
+            <a href="{{route('login.page')}}" class="text-gray-300 hover:text-white">Login</a>
+            <a href="{{route('register')}}" class="text-gray-300 hover:text-white">Registration</a>
             <div class="relative group">
-                <a href="#" class="text-gray-300 hover:text-white">Products</a>
+                <a href="{{route('products.index')}}" class="text-gray-300 hover:text-white">Products</a>
                 <div class="absolute hidden group-hover:block bg-gray-700 text-gray-300 mt-2 rounded shadow-lg">
                     <div class="relative group">
                         <a href="#" class="block px-4 py-2 hover:bg-gray-600">Category 1</a>

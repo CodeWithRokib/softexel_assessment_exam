@@ -19,7 +19,8 @@ class ProductController extends Controller
     }
 
     public function index2(){
-        return view('pages.product.index');
+        $products = Product::with(['category', 'subcategory'])->get();
+        return view('pages.product.index', compact('products'));
     }
     
     public function create(){
@@ -55,6 +56,41 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'nullable',
+            'image' => 'nullable|image',
+            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:sub_categories,id',
+        ]);
 
-    
+        $imagePath = $product->image;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
+
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'image' => $imagePath,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+        ]);
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+    }
+
+    public function destroy(Product $product)
+    {
+        if ($product->image) {
+            Storage::delete('public/' . $product->image);
+        }
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
+
 }
